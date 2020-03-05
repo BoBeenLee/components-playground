@@ -49,6 +49,8 @@
     "mobx": "^4.9.4",
     "mobx-react": "^5.4.3",
     "mobx-state-tree": "^3.15.0",
+    "moment": "^2.24.0",
+    "numeral": "^2.0.6",
     "polished": "^3.4.4",
     "qs": "^6.9.1",
     "react": "^16.11.0",

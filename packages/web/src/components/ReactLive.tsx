@@ -5,7 +5,10 @@ import styledNative from "styled-components/native";
 import _ from "lodash";
 import { reactLiveHome } from "src/styles/reactLiveTheme";
 
-const scope = { styled: styledNative, _ };
+interface IProps {
+  scope: object;
+  code: string;
+}
 
 const StyledProvider = styled(LiveProvider)``;
 
@@ -65,36 +68,8 @@ const StyledError = styled(LiveError)`
   overflow: auto;
 `;
 
-const code = `
-const Container = styled.View\`\`;
-
-class Counter extends React.Component {
-  constructor() {
-    super()
-    this.state = { count: 0 }
-  }
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState(state => ({ count: state.count + 1 }))
-    }, 1000)
-  }
-  componentWillUnmount() {
-    clearInterval(this.interval)
-  }
-  render() {
-    return (
-      <Container>
-        <h3>
-          {this.state.count}
-        </h3>
-      </Container>
-    )
-  }
-}
-render(<Counter />);
-`;
-
-const ReactLive = () => {
+const ReactLive = (props: IProps) => {
+  const { scope, code } = props;
   return (
     <StyledProvider
       scope={scope}
