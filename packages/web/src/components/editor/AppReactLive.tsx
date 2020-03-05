@@ -1,19 +1,198 @@
-import React from 'react';
+import React from "react";
+import {
+  createElement,
+  findNodeHandle,
+  processColor,
+  NativeModules,
+  ViewPropTypes, // APIs
+  AccessibilityInfo,
+  Alert,
+  Animated,
+  AppRegistry,
+  AppState,
+  AsyncStorage,
+  BackHandler,
+  Clipboard,
+  Dimensions,
+  Easing,
+  I18nManager,
+  InteractionManager,
+  Keyboard,
+  LayoutAnimation,
+  Linking,
+  NativeEventEmitter,
+  PanResponder,
+  PixelRatio,
+  Platform,
+  Share,
+  StyleSheet,
+  UIManager,
+  Vibration, // components
+  ActivityIndicator,
+  Button,
+  CheckBox,
+  FlatList,
+  Image,
+  ImageBackground,
+  KeyboardAvoidingView,
+  ListView,
+  Modal,
+  Picker,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  SectionList,
+  Slider,
+  StatusBar,
+  SwipeableListView,
+  Switch,
+  Text,
+  TextInput,
+  Touchable,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+  YellowBox, // propTypes
+  ColorPropType,
+  EdgeInsetsPropType,
+  PointPropType, // compat (components)
+  DatePickerIOS,
+  DrawerLayoutAndroid,
+  ImageEditor,
+  ImageStore,
+  InputAccessoryView,
+  MaskedViewIOS,
+  NavigatorIOS,
+  PickerIOS,
+  ProgressBarAndroid,
+  ProgressViewIOS,
+  SegmentedControlIOS,
+  SnapshotViewIOS,
+  TabBarIOS,
+  ToastAndroid,
+  ToolbarAndroid,
+  ViewPagerAndroid,
+  ActionSheetIOS,
+  CameraRoll,
+  DatePickerAndroid,
+  ImagePickerIOS,
+  PermissionsAndroid,
+  PushNotificationIOS,
+  Settings,
+  StatusBarIOS,
+  Systrace,
+  TimePickerAndroid
+} from "react-native";
 import styledNative, { css as cssNative } from "styled-components/native";
 
-import ReactLive, { commonCode, commonScope } from "src/components/editor/ReactLive";
+import ReactLive, {
+  commonCode,
+  commonScope
+} from "src/components/editor/ReactLive";
 
 const appCode = `
 const Container = styled.View\`\`;
 ${commonCode}
 `;
 
-const appScope = { ...commonScope, styled: styledNative, css: cssNative };
+const nativeScope = {
+  createElement,
+  findNodeHandle,
+  processColor,
+  NativeModules,
+  ViewPropTypes, // APIs
+  AccessibilityInfo,
+  Alert,
+  Animated,
+  AppRegistry,
+  AppState,
+  AsyncStorage,
+  BackHandler,
+  Clipboard,
+  Dimensions,
+  Easing,
+  I18nManager,
+  InteractionManager,
+  Keyboard,
+  LayoutAnimation,
+  Linking,
+  NativeEventEmitter,
+  PanResponder,
+  PixelRatio,
+  Platform,
+  Share,
+  StyleSheet,
+  UIManager,
+  Vibration, // components
+  ActivityIndicator,
+  Button,
+  CheckBox,
+  FlatList,
+  Image,
+  ImageBackground,
+  KeyboardAvoidingView,
+  ListView,
+  Modal,
+  Picker,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  SectionList,
+  Slider,
+  StatusBar,
+  SwipeableListView,
+  Switch,
+  Text,
+  TextInput,
+  Touchable,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+  YellowBox, // propTypes
+  ColorPropType,
+  EdgeInsetsPropType,
+  PointPropType, // compat (components)
+  DatePickerIOS,
+  DrawerLayoutAndroid,
+  ImageEditor,
+  ImageStore,
+  InputAccessoryView,
+  MaskedViewIOS,
+  NavigatorIOS,
+  PickerIOS,
+  ProgressBarAndroid,
+  ProgressViewIOS,
+  SegmentedControlIOS,
+  SnapshotViewIOS,
+  TabBarIOS,
+  ToastAndroid,
+  ToolbarAndroid,
+  ViewPagerAndroid,
+  ActionSheetIOS,
+  CameraRoll,
+  DatePickerAndroid,
+  ImagePickerIOS,
+  PermissionsAndroid,
+  PushNotificationIOS,
+  Settings,
+  StatusBarIOS,
+  Systrace,
+  TimePickerAndroid
+};
+
+const appScope = {
+  ...commonScope,
+  ...nativeScope,
+  styled: styledNative,
+  css: cssNative
+};
 
 const AppReactLive = () => {
-    return (
-        <ReactLive scope={appScope} code={appCode} />
-    );
+  return <ReactLive scope={appScope} code={appCode} />;
 };
 
 export default AppReactLive;

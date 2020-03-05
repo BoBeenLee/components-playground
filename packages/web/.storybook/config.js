@@ -1,5 +1,6 @@
 import React from "react";
 import { configure, addDecorator } from "@storybook/react";
+import { addons } from "@storybook/addons";
 import { withKnobs } from "@storybook/addon-knobs";
 import { createGlobalStyle } from "styled-components";
 
@@ -62,6 +63,10 @@ const GlobalStyle = createGlobalStyle`
   } */
 
 `;
+
+addons.setConfig({
+  showPanel: false
+});
 
 addDecorator(story => (
   <>
