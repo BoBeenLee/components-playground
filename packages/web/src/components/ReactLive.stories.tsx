@@ -7,6 +7,6 @@ storiesOf("ReactLive", module).add("ReactLive", () => <ReactLive />);
 
 addParameters({
   options: {
-    showPanel: false,
+    showPanel: false
   }
 });
