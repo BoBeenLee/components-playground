@@ -2,7 +2,7 @@ import { PageRendererProps } from "gatsby";
 import React from "react";
 
 import RNText from "@shared/components/text/RNText";
-import ReactLive from "src/components/ReactLive";
+import ReactLive from "src/components/editor/ReactLive";
 
 import Layout from "src/components/common/Layout";
 

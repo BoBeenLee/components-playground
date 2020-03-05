@@ -3,12 +3,44 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import styled, { css } from "styled-components";
 import styledNative from "styled-components/native";
 import _ from "lodash";
+import moment from "moment";
+import numeral from "numeral";
+
 import { reactLiveHome } from "src/styles/reactLiveTheme";
 
 interface IProps {
   scope: object;
   code: string;
 }
+
+export const commonCode = `
+class Counter extends React.Component {
+    constructor() {
+      super()
+      this.state = { count: 0 }
+    }
+    componentDidMount() {
+      this.interval = setInterval(() => {
+        this.setState(state => ({ count: state.count + 1 }))
+      }, 1000)
+    }
+    componentWillUnmount() {
+      clearInterval(this.interval)
+    }
+    render() {
+      return (
+        <Container>
+          <h3>
+            {this.state.count}
+          </h3>
+        </Container>
+      )
+    }
+  }
+  render(<Counter />);
+`;
+
+export const commonScope = { _, moment, numeral };
 
 const StyledProvider = styled(LiveProvider)``;
 
