@@ -1,16 +1,13 @@
 import React from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import styled, { css } from "styled-components";
-import * as polished from "polished";
+import styledNative from "styled-components/native";
+import _ from "lodash";
 import { reactLiveHome } from "src/styles/reactLiveTheme";
 
-const scope = { styled };
+const scope = { styled: styledNative, _ };
 
-const StyledProvider = styled(LiveProvider)`
-  border-radius: ${polished.rem(3)};
-  box-shadow: 1px 1px 20px rgba(20, 20, 20, 0.27);
-  overflow: hidden;
-`;
+const StyledProvider = styled(LiveProvider)``;
 
 const LiveWrapper = styled.div`
   display: flex;
@@ -35,9 +32,10 @@ const column = css`
 `;
 
 const StyledEditor = styled.div`
-  background: ${polished.darken(0.06, "#42374a")};
+  background: #42374a;
   font-family: "Source Code Pro", monospace;
-  font-size: ${polished.rem(14)};
+  font-size: 14px;
+  line-height: 1.4;
   overflow: auto;
   ${column};
   * > textarea:focus {
@@ -47,7 +45,7 @@ const StyledEditor = styled.div`
 
 const StyledPreview = styled(LivePreview)`
   position: relative;
-  padding: 0.5rem;
+  padding: 3px;
   background: white;
   color: black;
   height: auto;
@@ -58,7 +56,6 @@ const StyledPreview = styled(LivePreview)`
 const StyledError = styled(LiveError)`
   display: block;
   height: 200px;
-  padding: ${polished.rem(8)};
   background: #ff5555;
   color: #f8f8f2;
   white-space: pre-wrap;
@@ -69,7 +66,7 @@ const StyledError = styled(LiveError)`
 `;
 
 const code = `
-const Container = styled.div\`\`;
+const Container = styled.View\`\`;
 
 class Counter extends React.Component {
   constructor() {
