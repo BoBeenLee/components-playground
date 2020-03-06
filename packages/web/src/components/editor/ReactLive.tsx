@@ -126,7 +126,9 @@ const ReactLive = (props: IProps) => {
       target: languages.typescript.ScriptTarget.ESNext,
       allowNonTsExtensions: true,
       jsx: languages.typescript.JsxEmit.React,
-      noEmit: true
+      moduleResolution: languages.typescript.ModuleResolutionKind.NodeJs,
+      noEmit: true,
+      typeRoots: ["node_modules/@types"]
     });
   };
 
