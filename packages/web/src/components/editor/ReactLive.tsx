@@ -144,7 +144,6 @@ const ReactLive = (props: IProps) => {
         <StyledEditor>
           <SizeMe monitorHeight={true}>
             {({ size }: SizeMeProps) => {
-              console.log(size);
               return (
                 <MonacoEditor
                   width={size.width ?? undefined}

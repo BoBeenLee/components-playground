@@ -17,10 +17,9 @@
     "storybook:build": "build-storybook",
     "storybook:deploy": "storybook-to-ghpages -o ./storybook-static -c .storybook",
     "prettier": "prettier './src/**/*.{js,ts,tsx}'",
-    "lint:css": "stylelint './src/**/*.tsx'",
     "eslint": "./node_modules/.bin/eslint './src/**/*.{js,ts,tsx}'",
     "eslint:fix": "./node_modules/.bin/eslint './src/**/*.{js,ts,tsx}' --fix",
-    "prepush": "npm run lint:css && npm run eslint",
+    "prepush": "npm run eslint",
     "changelog": "auto-changelog -p && git add CHANGELOG.md",
     "version": "npm run changelog",
     "release": "release-it --ci"
