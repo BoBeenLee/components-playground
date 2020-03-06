@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import styled, { css } from "styled-components";
-import { languages } from "monaco-editor"
-import { transpile } from "typescript"
+import { languages } from "monaco-editor";
+import { transpile } from "typescript";
 import _ from "lodash";
 import moment from "moment";
 import numeral from "numeral";
+import MonacoEditor, { EditorDidMount } from "react-monaco-editor";
+import { SizeMe, SizeMeProps } from "react-sizeme";
 
 import { reactLiveHome } from "src/styles/reactLiveTheme";
 
@@ -43,11 +45,10 @@ class Counter extends React.Component {
 
 export const commonScope = { _, moment, numeral };
 
-const StyledProvider = styled(LiveProvider)({}, () => {
-
-});
+const StyledProvider = styled(LiveProvider)``;
 
 const LiveWrapper = styled.div`
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -92,44 +93,74 @@ const StyledPreview = styled(LivePreview)`
 `;
 
 const StyledError = styled(LiveError)`
+  position: absolute;
+  top: 0px;
+  right: 0px;
   display: block;
-  height: 200px;
   background: #ff5555;
   color: #f8f8f2;
   white-space: pre-wrap;
   text-align: left;
   font-size: 0.9em;
   font-family: "Source Code Pro", monospace;
-  overflow: auto;
+  z-index: 1000;
 `;
 
 const ReactLive = (props: IProps) => {
   const { scope, code } = props;
+  const [editorCode, setEditorCode] = useState(code);
+  const options = {
+    selectOnLineNumbers: true
+  };
+
+  const editorDidMount: EditorDidMount = editor => {
+    editor.focus();
+  };
+
+  const onChange = (newValue: string) => {
+    setEditorCode(newValue);
+  };
 
   const onTransformCode = (transformCode: string) => {
     return transpile(transformCode, {
       target: languages.typescript.ScriptTarget.ESNext,
       allowNonTsExtensions: true,
       jsx: languages.typescript.JsxEmit.React,
-      noEmit: true,
-    })
-  }
+      noEmit: true
+    });
+  };
 
   return (
     <StyledProvider
       scope={scope}
-      code={code}
+      code={editorCode}
       noInline={true}
       theme={reactLiveHome}
       transformCode={onTransformCode}
     >
       <LiveWrapper>
         <StyledEditor>
-          <LiveEditor />
+          <SizeMe monitorHeight={true}>
+            {({ size }: SizeMeProps) => {
+              console.log(size);
+              return (
+                <MonacoEditor
+                  width={size.width ?? undefined}
+                  height={size.height ?? undefined}
+                  language="javascript"
+                  theme="vs-dark"
+                  value={editorCode}
+                  options={options}
+                  onChange={onChange}
+                  editorDidMount={editorDidMount}
+                />
+              );
+            }}
+          </SizeMe>
         </StyledEditor>
         <StyledPreview />
+        <StyledError />
       </LiveWrapper>
-      <StyledError />
     </StyledProvider>
   );
 };

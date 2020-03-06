@@ -1,4 +1,5 @@
 const path = require("path");
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = ({ config }) => {
   // Transpile Gatsby module because Gatsby includes un-transpiled ES6 code.
@@ -72,6 +73,10 @@ module.exports = ({ config }) => {
     "styled-components": path.resolve(__dirname, "../node_modules", "styled-components")
   };
   config.resolve.extensions.push(".ts", ".tsx");
+
+  config.plugins = [...config.plugins, new MonacoWebpackPlugin({
+    languages: ["json", "javascript", "typescript"]
+  })];
 
   return config;
 };
