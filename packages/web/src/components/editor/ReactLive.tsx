@@ -1,7 +1,8 @@
 import React from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import styled, { css } from "styled-components";
-import styledNative from "styled-components/native";
+import { languages } from "monaco-editor"
+import { transpile } from "typescript"
 import _ from "lodash";
 import moment from "moment";
 import numeral from "numeral";
@@ -42,7 +43,9 @@ class Counter extends React.Component {
 
 export const commonScope = { _, moment, numeral };
 
-const StyledProvider = styled(LiveProvider)``;
+const StyledProvider = styled(LiveProvider)({}, () => {
+
+});
 
 const LiveWrapper = styled.div`
   display: flex;
@@ -102,12 +105,23 @@ const StyledError = styled(LiveError)`
 
 const ReactLive = (props: IProps) => {
   const { scope, code } = props;
+
+  const onTransformCode = (transformCode: string) => {
+    return transpile(transformCode, {
+      target: languages.typescript.ScriptTarget.ESNext,
+      allowNonTsExtensions: true,
+      jsx: languages.typescript.JsxEmit.React,
+      noEmit: true,
+    })
+  }
+
   return (
     <StyledProvider
       scope={scope}
       code={code}
       noInline={true}
       theme={reactLiveHome}
+      transformCode={onTransformCode}
     >
       <LiveWrapper>
         <StyledEditor>
